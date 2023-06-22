@@ -8,7 +8,7 @@
 import UIKit
 
 protocol IMainMenuView: AnyObject {
-    
+    func show(status: String)
 }
 
 class MainMenuView: UIViewController, IMainMenuView {
@@ -16,6 +16,22 @@ class MainMenuView: UIViewController, IMainMenuView {
     //MARK: - Private properties
     
     private let presenter: IMainMenuPresenter
+    
+    
+    //MARK: - Subviews
+    
+    private lazy var statusLabel: UILabel = {
+        let label = UILabel()
+        label.backgroundColor = .white
+        label.textColor = .black
+        view.addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            label.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+        return label
+    }()
     
     //MARK: - Lifecycle
     
@@ -33,7 +49,11 @@ class MainMenuView: UIViewController, IMainMenuView {
         super.viewDidLoad()
         view.backgroundColor = .brown
         
+        statusLabel.isHidden = false
         presenter.view = self
+    }
+    
+    func show(status: String) {
     }
     
 }
