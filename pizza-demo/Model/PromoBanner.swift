@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 struct PromoBanner: Codable, Hashable {
     
@@ -14,10 +13,3 @@ struct PromoBanner: Codable, Hashable {
     var imageUrl: ImageUrl
     
 }
-
-//class PromoBannerRealm: EmbeddedObject {
-//    
-//    @Persisted var id: String = ""
-//    @Persisted var imageBundleUrl: String = ""
-//    
-//}

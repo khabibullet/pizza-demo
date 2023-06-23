@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import RealmSwift
 
 struct Menu: Codable, Hashable {
     
@@ -15,11 +14,3 @@ struct Menu: Codable, Hashable {
     var items: [MenuCategory]
     
 }
-
-//class MenuRealm: Object {
-//
-//    @Persisted var city: String = ""
-//    @Persisted var banners = List<PromoBannerRealm>()
-//    @Persisted var categories = List<MenuCategoryRealm>()
-//
-//}

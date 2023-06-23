@@ -6,17 +6,14 @@
 //
 
 import Foundation
-import RealmSwift
 
 class MenuProvider {
     
     static let shared = MenuProvider()
     
-    private lazy var realm = try? Realm()
+    private init() {}
     
     let menuURL = URL(string: "https://raw.githubusercontent.com/khabibullet/pizza-demo/master/contents/pizza-demo-data.json")!
-    
-    private init() {}
     
     func fetchMenu() async -> Menu? {
         let request = URLRequest(url: menuURL)
