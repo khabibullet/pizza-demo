@@ -8,7 +8,9 @@
 import UIKit
 
 protocol IMainMenuView: AnyObject {
-    func show(status: String)
+    
+    func show(menu: Menu) async
+    
 }
 
 class MainMenuView: UIViewController, IMainMenuView {
@@ -53,7 +55,9 @@ class MainMenuView: UIViewController, IMainMenuView {
         presenter.view = self
     }
     
-    func show(status: String) {
+    @MainActor
+    func show(menu: Menu) async {
+        statusLabel.text = String(menu.items.count)
     }
     
 }

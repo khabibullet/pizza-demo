@@ -30,12 +30,8 @@ class MainMenuPresenter: IMainMenuPresenter {
     
     func fetchMenu() {
         Task {
-            do {
-                let menu = try await MenuProvider.shared.fetchMenu()
-                print(menu)
-            } catch {
-                print(error.localizedDescription)
-            }
+            guard let menu = await MenuProvider.shared.fetchMenu() else { return }
+            await view?.show(menu: menu)
         }
     }
     
