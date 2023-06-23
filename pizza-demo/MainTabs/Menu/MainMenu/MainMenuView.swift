@@ -57,6 +57,8 @@ class MainMenuView: UIViewController, IMainMenuView {
     
     @MainActor
     func show(menu: Menu) async {
+        print(menu)
+        
         statusLabel.text = String(menu.items.count)
     }
     

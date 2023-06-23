@@ -34,6 +34,7 @@
 		3F0C8A242A44CF89005A5613 /* PromoBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0C8A232A44CF89005A5613 /* PromoBanner.swift */; };
 		3F0C8A272A44D4EE005A5613 /* MenuCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0C8A262A44D4EE005A5613 /* MenuCategory.swift */; };
 		3F0C8A2A2A45E1FF005A5613 /* ImageUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0C8A292A45E1FE005A5613 /* ImageUrl.swift */; };
+		3F0C8A2C2A461B42005A5613 /* MenuFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0C8A2B2A461B42005A5613 /* MenuFileManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		3F0C8A232A44CF89005A5613 /* PromoBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoBanner.swift; sourceTree = "<group>"; };
 		3F0C8A262A44D4EE005A5613 /* MenuCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCategory.swift; sourceTree = "<group>"; };
 		3F0C8A292A45E1FE005A5613 /* ImageUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUrl.swift; sourceTree = "<group>"; };
+		3F0C8A2B2A461B42005A5613 /* MenuFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuFileManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				3F0C8A1E2A44B960005A5613 /* MenuProvider.swift */,
+				3F0C8A2B2A461B42005A5613 /* MenuFileManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 				3F0C8A0C2A449552005A5613 /* ProfilePresenter.swift in Sources */,
 				3F0C8A272A44D4EE005A5613 /* MenuCategory.swift in Sources */,
 				3F0C89EF2A448034005A5613 /* MainTabsCoordinator.swift in Sources */,
+				3F0C8A2C2A461B42005A5613 /* MenuFileManager.swift in Sources */,
 				3F0C89D42A44737F005A5613 /* AppDelegate.swift in Sources */,
 				3F0C8A1D2A44B92F005A5613 /* MenuItem.swift in Sources */,
 				3F0C8A142A4495B7005A5613 /* ProfileCoordinator.swift in Sources */,
