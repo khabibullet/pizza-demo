@@ -3,12 +3,12 @@
     "promoBanners": [
         {
             "id": "5a1c2470-11a3-11ee-be56-0242ac120002",
-            "imageRemoteUrl": "https://github.com/khabibullet/pizza-demo/contents/banners/banner-1.png":
+            "imageRemoteUrl": "https://github.com/khabibullet/pizza-demo/contents/banners/banner-1.png"
         },
         {
             "id": "9d17478a-11a5-11ee-be56-0242ac120002",
-            "imageRemoteUrl": "https://github.com/khabibullet/pizza-demo/contents/banners/banner-2.png":
-        },
+            "imageRemoteUrl": "https://github.com/khabibullet/pizza-demo/contents/banners/banner-2.png"
+        }
 	],
     "items": [
         {
