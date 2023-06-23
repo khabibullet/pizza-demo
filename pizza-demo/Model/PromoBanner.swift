@@ -10,13 +10,14 @@ import RealmSwift
 
 struct PromoBanner: Codable, Hashable {
     
-    var id: String
-    var imageRemoteUrl: String
+    var id: UUID
+    var imageUrl: ImageUrl
     
 }
 
-class PromoBannerRealm: EmbeddedObject {
-    
-    @Persisted var imageBundleUrl: String = ""
-    
-}
+//class PromoBannerRealm: EmbeddedObject {
+//    
+//    @Persisted var id: String = ""
+//    @Persisted var imageBundleUrl: String = ""
+//    
+//}

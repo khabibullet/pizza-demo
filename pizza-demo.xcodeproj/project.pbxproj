@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		3F0C89D42A44737F005A5613 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0C89D32A44737F005A5613 /* AppDelegate.swift */; };
 		3F0C89D62A44737F005A5613 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0C89D52A44737F005A5613 /* SceneDelegate.swift */; };
-		3F0C89D82A44737F005A5613 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0C89D72A44737F005A5613 /* ViewController.swift */; };
 		3F0C89DD2A447387005A5613 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F0C89DC2A447387005A5613 /* Assets.xcassets */; };
 		3F0C89E02A447387005A5613 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F0C89DE2A447387005A5613 /* LaunchScreen.storyboard */; };
 		3F0C89EA2A447D91005A5613 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0C89E92A447D91005A5613 /* Coordinator.swift */; };
@@ -41,7 +40,6 @@
 		3F0C89D02A44737F005A5613 /* pizza-demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "pizza-demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F0C89D32A44737F005A5613 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F0C89D52A44737F005A5613 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		3F0C89D72A44737F005A5613 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3F0C89DC2A447387005A5613 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3F0C89DF2A447387005A5613 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3F0C89E12A447387005A5613 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -100,15 +98,13 @@
 		3F0C89D22A44737F005A5613 /* pizza-demo */ = {
 			isa = PBXGroup;
 			children = (
+				3F0C8A282A45AAF1005A5613 /* Assets */,
 				3F0C89E82A447AD3005A5613 /* AppProtocols */,
 				3F0C89E72A4479C0005A5613 /* App */,
-				3F0C89D72A44737F005A5613 /* ViewController.swift */,
 				3F0C89F82A448500005A5613 /* Design */,
 				3F0C89ED2A447FE7005A5613 /* MainTabs */,
 				3F0C8A192A44B7CD005A5613 /* Model */,
 				3F0C8A252A44D04F005A5613 /* Services */,
-				3F0C89DC2A447387005A5613 /* Assets.xcassets */,
-				3F0C89DE2A447387005A5613 /* LaunchScreen.storyboard */,
 			);
 			path = "pizza-demo";
 			sourceTree = "<group>";
@@ -228,6 +224,15 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		3F0C8A282A45AAF1005A5613 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				3F0C89DC2A447387005A5613 /* Assets.xcassets */,
+				3F0C89DE2A447387005A5613 /* LaunchScreen.storyboard */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -312,7 +317,6 @@
 				3F0C8A082A449526005A5613 /* ContactsPresenter.swift in Sources */,
 				3F0C89F72A448431005A5613 /* MenuCoordinator.swift in Sources */,
 				3F0C8A162A4495D4005A5613 /* BasketCoordinator.swift in Sources */,
-				3F0C89D82A44737F005A5613 /* ViewController.swift in Sources */,
 				3F0C8A1B2A44B878005A5613 /* Menu.swift in Sources */,
 				3F0C89FE2A448B1E005A5613 /* ContactsView.swift in Sources */,
 				3F0C89FB2A44853C005A5613 /* Icon.swift in Sources */,

@@ -29,7 +29,14 @@ class MainMenuPresenter: IMainMenuPresenter {
     }
     
     func fetchMenu() {
-        
+        Task {
+            do {
+                let menu = try await MenuProvider.shared.fetchMenu()
+                print(menu)
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
     }
     
 }
