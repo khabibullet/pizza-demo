@@ -8,9 +8,9 @@
 import UIKit
 import RealmSwift
 
-struct MenuItem: Codable {
+struct MenuItem: Codable, Hashable {
     
-    var id: UUID
+    var id: String
     var title: String
     var text: String
     var price: String

@@ -8,9 +8,9 @@
 import Foundation
 import RealmSwift
 
-struct MenuCategory: Codable {
+struct MenuCategory: Codable, Hashable {
     
-    var id: UUID
+    var id: String
     var title: String
     var items: [MenuItem]
     

@@ -8,9 +8,9 @@
 import UIKit
 import RealmSwift
 
-struct PromoBanner: Codable {
+struct PromoBanner: Codable, Hashable {
     
-    var id: UUID
+    var id: String
     var imageRemoteUrl: String
     
 }

@@ -1,0 +1,75 @@
+{
+    "city": "Москва",
+    "promoBanners": [
+        {
+            "id": "5a1c2470-11a3-11ee-be56-0242ac120002",
+            "imageRemoteUrl": "https://github.com/khabibullet/pizza-demo/contents/banners/banner-1.png":
+        },
+        {
+            "id": "9d17478a-11a5-11ee-be56-0242ac120002",
+            "imageRemoteUrl": "https://github.com/khabibullet/pizza-demo/contents/banners/banner-2.png":
+        },
+	],
+    "items": [
+        {
+           "id": "a475a18e-11a5-11ee-be56-0242ac120002",
+           "title": "Пицца",
+           "items": [
+               {
+                   "id": "aa8b8160-11a5-11ee-be56-0242ac120002",
+                   "title": "Пицца 1",
+                   "text": "Ветчина,шампиньоны, увеличинная порция моцареллы, томатный соус",
+                   "price": "345",
+                   "imageRemoteUrl": "https://github.com/khabibullet/pizza-demo/contents/pizza/pizza-1.png"
+               },
+               {
+                   "id": "b0bc7fe4-11a5-11ee-be56-0242ac120002",
+                   "title": "Пицца 2",
+                   "text": "Баварски колбаски,ветчина, пикантная пепперони, острая чоризо, моцарелла, томатный соус",
+                   "price": "345",
+                   "imageRemoteUrl": "https://github.com/khabibullet/pizza-demo/contents/pizza/pizza-2.png"
+               }
+           ]
+        },
+        {
+           "id": "b7c351a0-11a5-11ee-be56-0242ac120002",
+           "title": "Комбо",
+           "items": [
+               {
+                   "id": "c0b50e7a-11a5-11ee-be56-0242ac120002",
+                   "title": "Комбо 1",
+                   "text": "Пицца с шампиньонами, средний додстер, напиток и соус на выбор по привлекательной цене",
+                   "price": "512",
+                   "imageRemoteUrl": "https://github.com/khabibullet/pizza-demo/contents/combo/combo-1.png"
+               },
+               {
+                   "id": "c7cd5f50-11a5-11ee-be56-0242ac120002",
+                   "title": "Комбо 2",
+                   "text": "Две средних пиццы 25см на выбор",
+                   "price": "515",
+                   "imageRemoteUrl": "https://github.com/khabibullet/pizza-demo/contents/combo/combo-2.png"
+               }
+           ]
+        },
+        {
+           "id": "cdf27d16-11a5-11ee-be56-0242ac120002",
+           "title": "Десерты",
+           "items": [
+               {
+                   "id": "d3ed7b8a-11a5-11ee-be56-0242ac120002",
+                   "title": "Десерт 1",
+                   "text": "Легкий, простой и вкусный чизкейк из сыра Филадельфия, подложка из коржа пропитанная ароматным сиропом, топпинг на выбор",
+                   "price": "275",
+                   "imageRemoteUrl": "https://github.com/khabibullet/pizza-demo/contents/deserts/desert-1.png"
+               },
+               {
+                   "id": "db2e9a6e-11a5-11ee-be56-0242ac120002",
+                   "title": "Десерт 2",
+                   "text": "Сладкий тающий во рту брауни, воздушный кекс, премиальная шоколадная начинка",
+                   "price": "275",
+                   "imageRemoteUrl": "https://github.com/khabibullet/pizza-demo/contents/deserts/desert-2.png"
+               }
+           ]
+        }
+    ]
+}

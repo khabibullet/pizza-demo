@@ -8,12 +8,10 @@
 import Foundation
 import RealmSwift
 
-struct Menu: Codable {
-    
+struct Menu: Codable, Hashable {
     var city: String
     var promoBanners: [PromoBanner]
     var items: [MenuCategory]
-    
 }
 
 class MenuRealm: Object {
