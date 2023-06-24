@@ -19,7 +19,7 @@ class MenuFileManager {
         in: .userDomainMask
     ).first
     
-    func createFile(name: String, data: Data) {
+    func createFile(name: String, data: Data) async {
         guard let fullPath = defaultPath?.appendingPathComponent(name) else {
             return
         }
@@ -29,25 +29,25 @@ class MenuFileManager {
         )
     }
     
-    func getFile(name: String) -> Data? {
+    func getFile(name: String) async -> Data? {
         guard let fullPath = defaultPath?.appendingPathComponent(name) else {
             return nil
         }
         return fileManager.contents(atPath: fullPath.path)
     }
     
-    func removeFile(name: String) {
+    func removeFile(name: String) async {
         guard let fullPath = defaultPath?.appendingPathComponent(name) else {
             return
         }
         try? fileManager.removeItem(at: fullPath)
     }
     
-    func removeFile(atPath path: String) {
+    func removeFile(atPath path: String) async {
         try? fileManager.removeItem(atPath: path)
     }
     
-    func getListOfFiles(with suffix: String) -> [String] {
+    func getListOfFiles(with suffix: String) async -> [String] {
         if  let defaultPath,
             let filtered = try? fileManager
                 .contentsOfDirectory(atPath: defaultPath.path)

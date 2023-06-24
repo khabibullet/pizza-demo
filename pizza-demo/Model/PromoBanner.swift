@@ -10,6 +10,6 @@ import UIKit
 struct PromoBanner: Codable, Hashable {
     
     var id: UUID
-    var imageUrl: ImageUrl
+    var imageUrl: String
     
 }

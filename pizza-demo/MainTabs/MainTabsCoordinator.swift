@@ -51,13 +51,10 @@ class MainTabsCoordinator: NSObject, IMainTabsCoordinator {
         super.init()
         
         tabBarController.delegate = self
-        tabBarController.tabBar.backgroundColor = UIColor.TabBar.background
-        tabBarController.tabBar.barTintColor = UIColor.TabBar.background
-        tabBarController.tabBar.tintColor = UIColor.TabBar.selected
-        tabBarController.tabBar.unselectedItemTintColor = UIColor.TabBar.unselected
+        tabBarController.tabBar.backgroundColor = .TabBar.background
+        tabBarController.tabBar.tintColor = .TabBar.selected
+        tabBarController.tabBar.unselectedItemTintColor = .TabBar.unselected
         tabBarController.tabBar.isTranslucent = false
-        tabBarController.tabBar.shadowImage = UIImage()
-        tabBarController.tabBar.clipsToBounds = true
     }
     
     // MARK: - Public methods

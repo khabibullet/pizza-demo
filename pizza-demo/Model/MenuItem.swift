@@ -13,6 +13,6 @@ struct MenuItem: Codable, Hashable {
     var title: String
     var text: String
     var price: String
-    var imageUrl: ImageUrl
+    var imageUrl: String
     
 }

@@ -13,5 +13,6 @@ struct Icon {
     static let location = UIImage(named: "icon-location")!
     static let profile = UIImage(named: "icon-profile")!
     static let basket = UIImage(named: "icon-basket")!
+    static let arrow = UIImage(named: "icon-arrow")!
     
 }

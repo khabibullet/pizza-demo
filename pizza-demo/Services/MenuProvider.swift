@@ -22,7 +22,7 @@ class MenuProvider {
             return try await fetchRemoteMenu()
         } catch {
             do {
-                return try fetchLocalMenu()
+                return try await fetchLocalMenu()
             } catch {
                 return nil
             }
@@ -39,22 +39,22 @@ class MenuProvider {
         return menu
     }
     
-    func fetchLocalMenu() throws -> Menu? {
-        guard let data = fileManager.getFile(name: "menu.json") else { return nil }
+    func fetchLocalMenu() async throws -> Menu? {
+        guard let data = await fileManager.getFile(name: "menu.json") else { return nil }
         return try JSONDecoder().decode(Menu.self, from: data)
     }
     
     func updateLocalMenu(newMenu: Menu) async throws {
-        try updateMenuJson(newMenu: newMenu)
-        updateMenuImages(newMenu: newMenu)
+        try await updateMenuJson(newMenu: newMenu)
+        await updateMenuImages(newMenu: newMenu)
     }
     
-    func updateMenuJson(newMenu: Menu) throws {
+    func updateMenuJson(newMenu: Menu) async throws {
         let data = try JSONEncoder().encode(newMenu)
-        fileManager.createFile(name: "menu.json", data: data)
+        await fileManager.createFile(name: "menu.json", data: data)
     }
     
-    func updateMenuImages(newMenu: Menu) {
+    func updateMenuImages(newMenu: Menu) async {
         var newImages = Set<UUID>()
     
         for banner in newMenu.promoBanners {
@@ -65,29 +65,38 @@ class MenuProvider {
                 newImages.insert(item.id)
             }
         }
-        let oldImages = MenuFileManager.shared.getListOfFiles(with: ".png")
+        let oldImages = await MenuFileManager.shared.getListOfFiles(with: ".png")
             .compactMap({ UUID(uuidString: String($0.suffix(40).prefix(36))) })
         
         for image in oldImages {
             if !newImages.contains(image) {
-                removeLocalImage(uuid: image)
+                await removeLocalImage(uuid: image)
             }
         }
     }
     
-    func createLocalImage(uuid: UUID, data: Data) {
-        fileManager.createFile(name: uuid.uuidString + ".png", data: data)
+    func createLocalImage(uuid: UUID, data: Data) async {
+        await fileManager.createFile(name: uuid.uuidString + ".png", data: data)
     }
     
-    func removeLocalImage(uuid: UUID) {
-        fileManager.removeFile(name: uuid.uuidString + ".png")
+    func removeLocalImage(uuid: UUID) async {
+        await fileManager.removeFile(name: uuid.uuidString + ".png")
     }
     
-    func getLocalImage(uuid: UUID) async -> UIImage? {
-        guard let data = fileManager.getFile(name: uuid.uuidString + ".png") else {
-            return nil
+    func getImage(uuid: UUID, url: String) async -> UIImage? {
+        if let data = await fileManager.getFile(name: uuid.uuidString + ".png") {
+            return UIImage(data: data)
+        } else {
+            guard let imageUrl = URL(string: url) else { return nil }
+            let request = URLRequest(url: imageUrl)
+            do {
+                let (data, _) = try await URLSession.shared.data(for: request)
+                await createLocalImage(uuid: uuid, data: data)
+                return UIImage(data: data)
+            } catch {
+                return nil
+            }
         }
-        return UIImage(data: data)
     }
     
 }
