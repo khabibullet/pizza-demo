@@ -102,7 +102,7 @@ class MenuItemCell: UICollectionViewCell {
         didSet {
             titleLabel.text = menuItem?.title
             contentLabel.text = menuItem?.text
-            priceLabel.text = "от \(menuItem?.price ?? "0") р"
+            priceLabel.text = menuItem?.price
             horizontalStack.isHidden = false
         }
     }
