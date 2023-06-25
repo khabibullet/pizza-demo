@@ -12,6 +12,7 @@ class CategoriesView: UICollectionReusableView {
     private let categoryCellRegistration = UICollectionView
         .CellRegistration<CategoryCell, CategoryState> { cell, _, category in
             cell.state = category
+            print("cell provided")
     }
 
     private lazy var categoriesCollection: UICollectionView = {
@@ -25,7 +26,7 @@ class CategoriesView: UICollectionReusableView {
                 )
                 let group = NSCollectionLayoutGroup.vertical(
                     layoutSize: NSCollectionLayoutSize(
-                        widthDimension: .estimated(30),
+                        widthDimension: .absolute(80),
                         heightDimension: .fractionalHeight(1.0)
                     ),
                     subitems: [item]
@@ -35,12 +36,29 @@ class CategoriesView: UICollectionReusableView {
                 return section
             }
         )
+        let config = UICollectionViewCompositionalLayoutConfiguration()
+        config.scrollDirection = .horizontal
+        layout.configuration = config
+        
         let collectionView = UICollectionView(
             frame: .zero, collectionViewLayout: layout
         )
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.delegate = self
-        collectionView.backgroundColor = .purple
+        collectionView.backgroundColor = .yellow
+        addSubview(collectionView)
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(
+                equalTo: topAnchor, constant: 20
+            ),
+            collectionView.leadingAnchor.constraint(
+                equalTo: leadingAnchor, constant: 16
+            ),
+            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            collectionView.bottomAnchor.constraint(
+                equalTo: bottomAnchor, constant: -20
+            )
+        ])
         return collectionView
     }()
 
@@ -57,23 +75,6 @@ class CategoriesView: UICollectionReusableView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupLayout()
-    }
-
-    private func setupLayout() {
-        addSubview(categoriesCollection)
-        NSLayoutConstraint.activate([
-            categoriesCollection.topAnchor.constraint(
-                equalTo: bottomAnchor, constant: 20
-            ),
-            categoriesCollection.leadingAnchor.constraint(
-                equalTo: leadingAnchor, constant: 16
-            ),
-            categoriesCollection.trailingAnchor.constraint(equalTo: trailingAnchor),
-            categoriesCollection.bottomAnchor.constraint(
-                equalTo: bottomAnchor, constant: -20
-            )
-        ])
     }
 
     required init?(coder: NSCoder) {
@@ -84,6 +85,7 @@ class CategoriesView: UICollectionReusableView {
 
     var categories: [CategoryState]? {
         didSet {
+            print("categories set")
             guard let categories else { return }
             reloadData(with: categories)
             categoriesCollection.isHidden = false

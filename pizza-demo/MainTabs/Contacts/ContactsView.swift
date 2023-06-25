@@ -12,7 +12,7 @@ protocol IContactsView: AnyObject {
 }
 
 class ContactsView: UIViewController, IContactsView {
-
+    
     //MARK: - Private properties
     
     private let presenter: IContactsPresenter

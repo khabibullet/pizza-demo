@@ -61,6 +61,7 @@ class MainMenuView: UIViewController, IMainMenuView {
         
         let config = UICollectionViewCompositionalLayoutConfiguration()
         config.scrollDirection = .vertical
+        config.interSectionSpacing = 0
         layout.configuration = config
         
         let collectionView = UICollectionView.init(
@@ -127,7 +128,7 @@ class MainMenuView: UIViewController, IMainMenuView {
                 let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
                     layoutSize: NSCollectionLayoutSize(
                         widthDimension: .fractionalWidth(1.0),
-                        heightDimension: .estimated(30)
+                        heightDimension: .absolute(80)
                     ),
                     elementKind: "categories-view",
                     alignment: .top

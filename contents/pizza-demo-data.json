@@ -70,6 +70,60 @@
                    "imageUrl": "https://raw.githubusercontent.com/khabibullet/pizza-demo/master/contents/categories/deserts/desert-2.png"
                }
            ]
+        },
+        {
+           "id": "cdf27d16-11a5-11ee-be56-0242ac120002",
+           "title": "Закуски",
+           "items": [
+               {
+                   "id": "d3e67b8a-11a5-115e-be56-1242ac130002",
+                   "title": "Закуска 1",
+                   "text": "Классическая закуска подойдет как истинным гурманам, так и любителям фастфуда",
+                   "price": "от 275 р",
+                   "imageUrl": "https://raw.githubusercontent.com/khabibullet/pizza-demo/master/contents/categories/snacks/snack-1.png"
+               },
+               {
+                   "id": "db279cce-11a5-17ee-be56-0242ac124002",
+                   "title": "Закуска 2",
+                   "text": "Хрустящий снек соберет компанию друзей и накормит",
+                   "price": "от 275 р",
+                   "imageUrl": "https://raw.githubusercontent.com/khabibullet/pizza-demo/master/contents/categories/snacks/snack-2.png"
+               },
+               {
+                   "id": "db2a9c3e-11d5-17ee-be56-0242ac1b4012",
+                   "title": "Закуска 3",
+                   "text": "Полноценное блюдо поможет утолить твой голод, соус на выбор",
+                   "price": "от 275 р",
+                   "imageUrl": "https://raw.githubusercontent.com/khabibullet/pizza-demo/master/contents/categories/snacks/snack-2.png"
+               }
+           ]
+        },
+        {
+           "id": "ede27d17-11a5-11ee-ae56-0242ac120002",
+           "title": "Напитки",
+           "items": [
+               {
+                   "id": "d5ed758a-11a5-11ee-1e56-0242aca20002",
+                   "title": "Напиток 1",
+                   "text": "Базовый бодрящий напиток объемом 0.2л",
+                   "price": "от 75 р",
+                   "imageUrl": "https://raw.githubusercontent.com/khabibullet/pizza-demo/master/contents/categories/drinks/drink-1.png"
+               },
+               {
+                   "id": "db2e6ace-11a5-11ee-be56-0242aa1200e2",
+                   "title": "Напиток 2",
+                   "text": "Натуральный горячий кофе в перерабатываемом стаканчике - то что нужно для хорошего начала дня",
+                   "price": "от 125 р",
+                   "imageUrl": "https://raw.githubusercontent.com/khabibullet/pizza-demo/master/contents/categories/drinks/drink-2.png"
+               },
+               {
+                   "id": "db2e65ce-1ca5-11ee-be56-0245aa1200e2",
+                   "title": "Напиток 3",
+                   "text": "Прохладный освежающий напиток с минимальным добавлением сахара",
+                   "price": "от 85 р",
+                   "imageUrl": "https://raw.githubusercontent.com/khabibullet/pizza-demo/master/contents/categories/drinks/drink-3.png"
+               }
+           ]
         }
     ]
 }
