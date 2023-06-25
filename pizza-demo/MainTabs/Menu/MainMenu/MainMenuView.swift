@@ -61,21 +61,21 @@ class MainMenuView: UIViewController, IMainMenuView {
         
         let config = UICollectionViewCompositionalLayoutConfiguration()
         config.scrollDirection = .vertical
-        config.interSectionSpacing = 0
+        config.interSectionSpacing = 20
         layout.configuration = config
         
         let collectionView = UICollectionView.init(
             frame: .zero, collectionViewLayout: layout
         )
+        collectionView.showsVerticalScrollIndicator = false
         collectionView.backgroundColor = .Background.view
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.delegate = self
-        collectionView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
         
         view.addSubview(collectionView)
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(
-                equalTo: cityPicker.bottomAnchor, constant: 15
+                equalTo: cityPicker.bottomAnchor, constant: 20
             ),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -94,7 +94,7 @@ class MainMenuView: UIViewController, IMainMenuView {
                         heightDimension: .fractionalHeight(1.0)
                     )
                 )
-                let containerGroup = NSCollectionLayoutGroup.horizontal(
+                let containerGroup = NSCollectionLayoutGroup.vertical(
                     layoutSize: NSCollectionLayoutSize(
                         widthDimension: .absolute(300),
                         heightDimension: .absolute(112)
@@ -103,10 +103,6 @@ class MainMenuView: UIViewController, IMainMenuView {
                 )
                 let section = NSCollectionLayoutSection(group: containerGroup)
                 section.orthogonalScrollingBehavior = .groupPaging
-                section.contentInsets = NSDirectionalEdgeInsets(
-                    top: 0, leading: 16, bottom: 0, trailing: 0
-                )
-                section.interGroupSpacing = 16
                 return section
             } else {
                 let item = NSCollectionLayoutItem(
@@ -128,7 +124,7 @@ class MainMenuView: UIViewController, IMainMenuView {
                 let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
                     layoutSize: NSCollectionLayoutSize(
                         widthDimension: .fractionalWidth(1.0),
-                        heightDimension: .absolute(80)
+                        heightDimension: .absolute(50)
                     ),
                     elementKind: "categories-view",
                     alignment: .top
@@ -267,7 +263,7 @@ class MainMenuView: UIViewController, IMainMenuView {
         else {
             return
         }
-        menuCollectionView.scrollToItem(at: path, at: .top, animated: true)
+        menuCollectionView.scrollToItem(at: path, at: .centeredVertically, animated: true)
     }
     
 }

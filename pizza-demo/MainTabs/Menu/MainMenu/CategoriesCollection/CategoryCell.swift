@@ -14,8 +14,11 @@ class CategoryCell: UICollectionViewCell {
         label.textAlignment = .center
         contentView.addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        label.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            label.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
+            label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
+        ])
         return label
     }()
     
@@ -33,17 +36,17 @@ class CategoryCell: UICollectionViewCell {
     func setSelected() {
         label.font = .Button.bold
         label.textColor = .Button.selected
-        contentView.layer.cornerRadius = 20
+        contentView.layer.cornerRadius = 15
         contentView.layer.borderWidth = 0
         contentView.layer.borderColor = .none
-        contentView.backgroundColor = .Button.selected
+        contentView.backgroundColor = .Button.base
         label.sizeToFit()
     }
     
     func setDeselected() {
         label.font = .Button.medium
         label.textColor = .Button.base
-        contentView.layer.cornerRadius = 20
+        contentView.layer.cornerRadius = 15
         contentView.layer.borderWidth = 1
         contentView.layer.borderColor = UIColor.Button.base.cgColor
         contentView.backgroundColor = .clear

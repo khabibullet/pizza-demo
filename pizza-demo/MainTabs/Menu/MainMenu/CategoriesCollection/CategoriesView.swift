@@ -12,7 +12,6 @@ class CategoriesView: UICollectionReusableView {
     private let categoryCellRegistration = UICollectionView
         .CellRegistration<CategoryCell, CategoryState> { cell, _, category in
             cell.state = category
-            print("cell provided")
     }
 
     private lazy var categoriesCollection: UICollectionView = {
@@ -26,13 +25,13 @@ class CategoriesView: UICollectionReusableView {
                 )
                 let group = NSCollectionLayoutGroup.vertical(
                     layoutSize: NSCollectionLayoutSize(
-                        widthDimension: .absolute(80),
+                        widthDimension: .absolute(100),
                         heightDimension: .fractionalHeight(1.0)
                     ),
                     subitems: [item]
                 )
                 let section = NSCollectionLayoutSection(group: group)
-                section.interGroupSpacing = 20
+                section.interGroupSpacing = 10
                 return section
             }
         )
@@ -43,13 +42,15 @@ class CategoriesView: UICollectionReusableView {
         let collectionView = UICollectionView(
             frame: .zero, collectionViewLayout: layout
         )
+        backgroundColor = .Background.view
+        collectionView.backgroundColor = .Background.view
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.delegate = self
-        collectionView.backgroundColor = .yellow
         addSubview(collectionView)
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(
-                equalTo: topAnchor, constant: 20
+                equalTo: topAnchor
             ),
             collectionView.leadingAnchor.constraint(
                 equalTo: leadingAnchor, constant: 16
@@ -85,7 +86,6 @@ class CategoriesView: UICollectionReusableView {
 
     var categories: [CategoryState]? {
         didSet {
-            print("categories set")
             guard let categories else { return }
             reloadData(with: categories)
             categoriesCollection.isHidden = false
