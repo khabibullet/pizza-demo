@@ -19,16 +19,14 @@ class CategoriesView: UICollectionReusableView {
             sectionProvider: {_,_ in
                 let item = NSCollectionLayoutItem(
                     layoutSize: NSCollectionLayoutSize(
-                        widthDimension: .fractionalWidth(1.0),
-                        heightDimension: .fractionalHeight(1.0)
+                        widthDimension: .estimated(88),
+                        heightDimension: .absolute(32)
                     )
                 )
                 let group = NSCollectionLayoutGroup.vertical(
-                    layoutSize: NSCollectionLayoutSize(
-                        widthDimension: .absolute(100),
-                        heightDimension: .fractionalHeight(1.0)
-                    ),
-                    subitems: [item]
+                    layoutSize: item.layoutSize,
+                    subitem: item,
+                    count: 1
                 )
                 let section = NSCollectionLayoutSection(group: group)
                 section.interGroupSpacing = 10
@@ -44,20 +42,18 @@ class CategoriesView: UICollectionReusableView {
         )
         backgroundColor = .Background.view
         collectionView.backgroundColor = .Background.view
+        
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 20)
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.delegate = self
         addSubview(collectionView)
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(
-                equalTo: topAnchor
-            ),
-            collectionView.leadingAnchor.constraint(
-                equalTo: leadingAnchor, constant: 16
-            ),
+            collectionView.topAnchor.constraint(equalTo: topAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
             collectionView.bottomAnchor.constraint(
-                equalTo: bottomAnchor, constant: -20
+                equalTo: bottomAnchor, constant: -24
             )
         ])
         return collectionView

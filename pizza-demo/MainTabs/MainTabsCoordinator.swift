@@ -51,10 +51,21 @@ class MainTabsCoordinator: NSObject, IMainTabsCoordinator {
         super.init()
         
         tabBarController.delegate = self
-        tabBarController.tabBar.backgroundColor = .TabBar.background
         tabBarController.tabBar.tintColor = .TabBar.selected
         tabBarController.tabBar.unselectedItemTintColor = .TabBar.unselected
-        tabBarController.tabBar.isTranslucent = false
+        tabBarController.tabBar.backgroundColor = .Background.cell
+        
+        let appearance = UITabBarAppearance()
+        appearance.shadowColor = .Background.view
+        appearance.backgroundColor = .Background.cell
+        tabBarController.tabBar.scrollEdgeAppearance = appearance
+        tabBarController.tabBar.standardAppearance = appearance
+        
+        tabBarController.tabBar.layer.shadowOffset = CGSize(width: 0, height: 0)
+        tabBarController.tabBar.layer.shadowRadius = 10
+        tabBarController.tabBar.layer.shadowColor = UIColor.Background.view.cgColor
+        tabBarController.tabBar.layer.shadowOpacity = 1.0
+        
     }
     
     // MARK: - Public methods

@@ -13,7 +13,7 @@ extension UIColor {
         
         static let selected = UIColor(named: "pink-100")!
         static let unselected = UIColor(named: "inactive")!
-        static let background = UIColor(named: "tabbar")!
+        static let background = UIColor(named: "background-2")!
 
     }
     

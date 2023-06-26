@@ -32,6 +32,8 @@ class MainMenuView: UIViewController, IMainMenuView {
     private var categoriesViewRegistration: UICollectionView
         .SupplementaryRegistration<CategoriesView>!
     
+    private var categoriesViewPath: IndexPath?
+    
     //MARK: - Subviews
     
     private lazy var cityPicker: UIStackView = {
@@ -43,7 +45,7 @@ class MainMenuView: UIViewController, IMainMenuView {
         stack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             stack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            stack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20)
+            stack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16)
         ])
         return stack
     }()
@@ -70,7 +72,7 @@ class MainMenuView: UIViewController, IMainMenuView {
         
         let config = UICollectionViewCompositionalLayoutConfiguration()
         config.scrollDirection = .vertical
-        config.interSectionSpacing = 20
+        config.interSectionSpacing = 19
         layout.configuration = config
         
         let collectionView = UICollectionView.init(
@@ -84,7 +86,7 @@ class MainMenuView: UIViewController, IMainMenuView {
         view.addSubview(collectionView)
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(
-                equalTo: cityPicker.bottomAnchor, constant: 20
+                equalTo: cityPicker.bottomAnchor, constant: 19
             ),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -103,27 +105,27 @@ class MainMenuView: UIViewController, IMainMenuView {
                         heightDimension: .fractionalHeight(1.0)
                     )
                 )
-                let containerGroup = NSCollectionLayoutGroup.vertical(
+                let group = NSCollectionLayoutGroup.horizontal(
                     layoutSize: NSCollectionLayoutSize(
                         widthDimension: .absolute(300),
                         heightDimension: .absolute(112)
                     ),
-                    subitems: [item]
+                    subitem: item, count: 1
                 )
-                let section = NSCollectionLayoutSection(group: containerGroup)
-                section.orthogonalScrollingBehavior = .groupPaging
+                let section = NSCollectionLayoutSection(group: group)
+                section.orthogonalScrollingBehavior = .continuous
                 return section
             } else {
                 let item = NSCollectionLayoutItem(
                     layoutSize: NSCollectionLayoutSize(
                         widthDimension: .fractionalWidth(1.0),
-                        heightDimension: .estimated(200)
+                        heightDimension: .fractionalHeight(1.0)
                     )
                 )
-                let group = NSCollectionLayoutGroup.horizontal(
+                let group = NSCollectionLayoutGroup.vertical(
                     layoutSize: NSCollectionLayoutSize(
                         widthDimension: .fractionalWidth(1.0),
-                        heightDimension: .estimated(300)
+                        heightDimension: .estimated(200)
                     ),
                     subitem: item,
                     count: 1
@@ -134,7 +136,7 @@ class MainMenuView: UIViewController, IMainMenuView {
                 let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
                     layoutSize: NSCollectionLayoutSize(
                         widthDimension: .fractionalWidth(1.0),
-                        heightDimension: .absolute(50)
+                        heightDimension: .estimated(56)
                     ),
                     elementKind: "categories-view",
                     alignment: .top
@@ -194,7 +196,7 @@ class MainMenuView: UIViewController, IMainMenuView {
         presenter.view = self
     }
     
-    private var categoriesViewPath: IndexPath?
+    // MARK: - Public methods
     
     @MainActor
     func show(menu: Menu) async {
@@ -208,6 +210,8 @@ class MainMenuView: UIViewController, IMainMenuView {
         setupCollectionViewElementsRegistration()
         reloadData(with: menu)
     }
+    
+    // MARK: - Private methods
     
     private func setupCollectionViewElementsRegistration() {
         

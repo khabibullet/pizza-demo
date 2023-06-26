@@ -31,7 +31,7 @@ class ContactsView: UIViewController, IContactsView {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .purple
+        view.backgroundColor = .Background.view
         
         presenter.view = self
     }

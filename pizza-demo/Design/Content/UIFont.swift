@@ -13,7 +13,6 @@ extension UIFont {
 
         static let semibold = UIFont.systemFont(ofSize: 17, weight: .semibold)
         static let bold = UIFont.systemFont(ofSize: 17, weight: .bold)
-        
     }
     
     struct Content {

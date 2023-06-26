@@ -31,7 +31,7 @@ class BasketView: UIViewController, IBasketView {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .cyan
+        view.backgroundColor = .Background.view
         
         presenter.view = self
     }
