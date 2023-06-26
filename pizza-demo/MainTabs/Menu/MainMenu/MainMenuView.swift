@@ -19,9 +19,18 @@ class MainMenuView: UIViewController, IMainMenuView {
     
     private let presenter: IMainMenuPresenter
     
-    private var menuCategories: [CategoryState]!
-    
     private var menu: Menu!
+    private var menuCategories: [CategoryState]!
+    private var menuImages = Dictionary<UUID, UIImage>()
+
+    private var promoBannerCellRegistration: UICollectionView
+        .CellRegistration<PromoBannerCell, PromoBanner>!
+    
+    private var menuItemCellRegistration: UICollectionView
+        .CellRegistration<MenuItemCell, MenuItem>!
+    
+    private var categoriesViewRegistration: UICollectionView
+        .SupplementaryRegistration<CategoriesView>!
     
     //MARK: - Subviews
     
@@ -166,34 +175,6 @@ class MainMenuView: UIViewController, IMainMenuView {
         return dataSource
     }()
     
-    private let promoBannerCellRegistration = UICollectionView
-        .CellRegistration<PromoBannerCell, PromoBanner> { cell, _, promoBanner in
-        cell.promoBanner = promoBanner
-        Task {
-            try? await Task.sleep(nanoseconds: 1 * 1_000_000_000)
-            let image = await MenuProvider.shared.getImage(
-                uuid: promoBanner.id, url: promoBanner.imageUrl
-            )
-            cell.image = image
-        }
-    }
-    
-    private let menuItemCellRegistration = UICollectionView
-        .CellRegistration<MenuItemCell, MenuItem> { cell, indexPath, menuItem in
-        cell.menuItem = menuItem
-        cell.isCellOnTop = indexPath.item == 0 ? true : false
-        Task {
-            try? await Task.sleep(nanoseconds: 1 * 1_000_000_000)
-            let image = await MenuProvider.shared.getImage(
-                uuid: menuItem.id, url: menuItem.imageUrl
-            )
-            cell.image = image
-        }
-    }
-    
-    private var categoriesViewRegistration: UICollectionView
-        .SupplementaryRegistration<CategoriesView>!
-    
     //MARK: - Lifecycle
     
     init(presenter: IMainMenuPresenter) {
@@ -224,18 +205,58 @@ class MainMenuView: UIViewController, IMainMenuView {
         if !menuCategories.isEmpty {
             menuCategories[0].isSelected = true
         }
-        categoriesViewRegistration = UICollectionView
-            .SupplementaryRegistration<CategoriesView>(elementKind: "categories-view") {
-            supplementaryView, _, indexPath in
-            supplementaryView.categories = self.menuCategories
-            supplementaryView.onSelect = { [weak self] id in
-                self?.categorySelected(uuid: id)
-            }
-            if self.categoriesViewPath == nil {
-                self.categoriesViewPath = indexPath
-            }
-        }
+        setupCollectionViewElementsRegistration()
         reloadData(with: menu)
+    }
+    
+    private func setupCollectionViewElementsRegistration() {
+        
+        categoriesViewRegistration = UICollectionView
+            .SupplementaryRegistration<CategoriesView>(
+                elementKind: "categories-view"
+            ) { supplementaryView, _, indexPath in
+                supplementaryView.categories = self.menuCategories
+                supplementaryView.onSelect = { [weak self] id in
+                    self?.categorySelected(uuid: id)
+                }
+                if self.categoriesViewPath == nil {
+                    self.categoriesViewPath = indexPath
+                }
+            }
+        
+        promoBannerCellRegistration = UICollectionView
+            .CellRegistration<PromoBannerCell, PromoBanner> { cell, _, promoBanner in
+                cell.promoBanner = promoBanner
+                if let image = self.menuImages[promoBanner.id] {
+                    cell.image = image
+                    return
+                }
+                Task {
+                    let image = await MenuProvider.getImage(
+                        uuid: promoBanner.id, url: promoBanner.imageUrl
+                    )
+                    cell.image = image
+                    self.menuImages[promoBanner.id] = image
+                }
+            }
+        
+        menuItemCellRegistration = UICollectionView
+            .CellRegistration<MenuItemCell, MenuItem> { cell, indexPath, menuItem in
+                cell.menuItem = menuItem
+                cell.isCellOnTop = indexPath.item == 0 ? true : false
+                if let image = self.menuImages[menuItem.id] {
+                    cell.image = image
+                    return
+                }
+                Task {
+                    let image = await MenuProvider.getImage(
+                        uuid: menuItem.id, url: menuItem.imageUrl
+                    )
+                    cell.image = image
+                    self.menuImages[menuItem.id] = image
+                }
+            }
+        
     }
     
     private func reloadData(with menu: Menu) {

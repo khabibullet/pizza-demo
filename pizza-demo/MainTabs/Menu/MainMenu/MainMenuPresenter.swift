@@ -30,7 +30,7 @@ class MainMenuPresenter: IMainMenuPresenter {
     
     func fetchMenu() {
         Task {
-            guard let menu = await MenuProvider.shared.fetchMenu() else { return }
+            guard let menu = await MenuProvider.fetchMenu() else { return }
             await view?.show(menu: menu)
         }
     }
