@@ -36,6 +36,7 @@ extension UIColor {
         
         static let view = UIColor(named: "background-1")!
         static let cell = UIColor(named: "background-2")!
+        static let shadow = UIColor(named: "shadow")!
         
     }
     

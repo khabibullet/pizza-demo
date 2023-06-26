@@ -33,6 +33,7 @@ class MainMenuView: UIViewController, IMainMenuView {
         .SupplementaryRegistration<CategoriesView>!
     
     private var categoriesViewPath: IndexPath?
+    private var categoriesViewInitialOriginY: CGFloat?
     
     //MARK: - Subviews
     
@@ -319,6 +320,23 @@ extension MainMenuView: UICollectionViewDelegate {
             forElementKind: "categories-view", at: categoriesViewPath!
         ) as! CategoriesView
         categoriesView.categorySelected(index: id)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let collectionView = scrollView as! UICollectionView
+        guard let categoriesView = collectionView.visibleSupplementaryViews(
+            ofKind: "categories-view"
+        ).first as? CategoriesView else { return }
+        
+        guard let categoriesViewInitialOriginY else {
+            categoriesViewInitialOriginY = categoriesView.frame.origin.y
+            return
+        }
+        if categoriesView.frame.origin.y > categoriesViewInitialOriginY {
+            categoriesView.dropShadow()
+        } else {
+            categoriesView.removeShadow()
+        }
     }
     
 }

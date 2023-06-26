@@ -41,8 +41,13 @@ class CategoriesView: UICollectionReusableView {
             frame: .zero, collectionViewLayout: layout
         )
         backgroundColor = .Background.view
-        collectionView.backgroundColor = .Background.view
         
+        layer.shadowColor = UIColor.Background.shadow.cgColor
+        layer.shadowOpacity = 0.0
+        layer.shadowRadius = 10
+        layer.shadowOffset = CGSize(width: 0, height: 10)
+        
+        collectionView.backgroundColor = .Background.view
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 20)
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -106,6 +111,18 @@ class CategoriesView: UICollectionReusableView {
         categoriesCollection.scrollToItem(
             at: path, at: .left, animated: true
         )
+    }
+    
+    func dropShadow() {
+        UIView.animate(withDuration: 0.5) {
+            self.layer.shadowOpacity = 1.0
+        }
+    }
+    
+    func removeShadow() {
+        UIView.animate(withDuration: 0.2) {
+            self.layer.shadowOpacity = 0.0
+        }
     }
     
 }
