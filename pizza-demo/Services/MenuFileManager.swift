@@ -7,49 +7,44 @@
 
 import Foundation
 
-class MenuFileManager {
+struct MenuFileManager {
     
-    static let shared = MenuFileManager()
-    
-    private init() {}
-    
-    let fileManager = FileManager.default
-    let defaultPath = FileManager.default.urls(
+    static let defaultPath = FileManager.default.urls(
         for: .documentDirectory,
         in: .userDomainMask
     ).first
     
-    func createFile(name: String, data: Data) async {
+    static func createFile(name: String, data: Data) async {
         guard let fullPath = defaultPath?.appendingPathComponent(name) else {
             return
         }
-        fileManager.createFile(
+        FileManager().createFile(
             atPath: fullPath.path,
             contents: data
         )
     }
     
-    func getFile(name: String) async -> Data? {
+    static func getFile(name: String) async -> Data? {
         guard let fullPath = defaultPath?.appendingPathComponent(name) else {
             return nil
         }
-        return fileManager.contents(atPath: fullPath.path)
+        return FileManager().contents(atPath: fullPath.path)
     }
     
-    func removeFile(name: String) async {
+    static func removeFile(name: String) async {
         guard let fullPath = defaultPath?.appendingPathComponent(name) else {
             return
         }
-        try? fileManager.removeItem(at: fullPath)
+        try? FileManager().removeItem(at: fullPath)
     }
     
-    func removeFile(atPath path: String) async {
-        try? fileManager.removeItem(atPath: path)
+    static func removeFile(atPath path: String) async {
+        try? FileManager().removeItem(atPath: path)
     }
     
-    func getListOfFiles(with suffix: String) async -> [String] {
+    static func getListOfFiles(with suffix: String) async -> [String] {
         if  let defaultPath,
-            let filtered = try? fileManager
+            let filtered = try? FileManager()
                 .contentsOfDirectory(atPath: defaultPath.path)
                 .filter({ $0.hasSuffix(suffix) }) {
             return filtered
