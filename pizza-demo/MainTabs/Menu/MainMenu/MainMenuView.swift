@@ -108,17 +108,18 @@ class MainMenuView: UIViewController, IMainMenuView {
                 let item = NSCollectionLayoutItem(
                     layoutSize: NSCollectionLayoutSize(
                         widthDimension: .fractionalWidth(1.0),
-                        heightDimension: .estimated(50)
+                        heightDimension: .estimated(200)
                     )
                 )
-                let containerGroup = NSCollectionLayoutGroup.horizontal(
+                let group = NSCollectionLayoutGroup.horizontal(
                     layoutSize: NSCollectionLayoutSize(
                         widthDimension: .fractionalWidth(1.0),
-                        heightDimension: .estimated(50)
+                        heightDimension: .estimated(300)
                     ),
-                    subitems: [item]
+                    subitem: item,
+                    count: 1
                 )
-                let section = NSCollectionLayoutSection(group: containerGroup)
+                let section = NSCollectionLayoutSection(group: group)
                 section.interGroupSpacing = 1
                 
                 let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
@@ -167,23 +168,27 @@ class MainMenuView: UIViewController, IMainMenuView {
     
     private let promoBannerCellRegistration = UICollectionView
         .CellRegistration<PromoBannerCell, PromoBanner> { cell, _, promoBanner in
-            cell.promoBanner = promoBanner
-            Task {
-                cell.image = await MenuProvider.shared.getImage(
-                    uuid: promoBanner.id, url: promoBanner.imageUrl
-                )
-            }
+        cell.promoBanner = promoBanner
+        Task {
+            try? await Task.sleep(nanoseconds: 1 * 1_000_000_000)
+            let image = await MenuProvider.shared.getImage(
+                uuid: promoBanner.id, url: promoBanner.imageUrl
+            )
+            cell.image = image
+        }
     }
     
     private let menuItemCellRegistration = UICollectionView
         .CellRegistration<MenuItemCell, MenuItem> { cell, indexPath, menuItem in
-            cell.menuItem = menuItem
-            cell.isCellOnTop = indexPath.item == 0 ? true : false
-            Task {
-                cell.image = await MenuProvider.shared.getImage(
-                    uuid: menuItem.id, url: menuItem.imageUrl
-                )
-            }
+        cell.menuItem = menuItem
+        cell.isCellOnTop = indexPath.item == 0 ? true : false
+        Task {
+            try? await Task.sleep(nanoseconds: 1 * 1_000_000_000)
+            let image = await MenuProvider.shared.getImage(
+                uuid: menuItem.id, url: menuItem.imageUrl
+            )
+            cell.image = image
+        }
     }
     
     private var categoriesViewRegistration: UICollectionView

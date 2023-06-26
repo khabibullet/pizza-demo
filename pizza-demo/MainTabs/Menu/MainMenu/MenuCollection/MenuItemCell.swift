@@ -9,45 +9,23 @@ import UIKit
 
 class MenuItemCell: UICollectionViewCell {
     
-    private lazy var horizontalStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [imageView, descriptionStack])
-        stack.axis = .horizontal
-        stack.alignment = .top
-        stack.spacing = 15
-        contentView.addSubview(stack)
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            stack.leadingAnchor.constraint(
-                equalTo: contentView.leadingAnchor, constant: 16
-            ),
-            stack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
-            stack.trailingAnchor.constraint(
-                equalTo: contentView.trailingAnchor, constant: -20
-            ),
-            stack.bottomAnchor.constraint(
-                equalTo: contentView.bottomAnchor, constant: -20
-            )
-        ])
-        contentView.backgroundColor = .Background.cell
-        return stack
-    }()
-    
     private lazy var imageView: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
+        contentView.addSubview(image)
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.heightAnchor.constraint(equalToConstant: 130).isActive = true
-        image.widthAnchor.constraint(equalToConstant: 130).isActive = true
+        NSLayoutConstraint.activate([
+            image.leadingAnchor.constraint(
+                equalTo: contentView.leadingAnchor, constant: 16
+            ),
+            image.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            image.heightAnchor.constraint(equalToConstant: 130),
+            image.widthAnchor.constraint(equalToConstant: 130),
+            image.bottomAnchor.constraint(
+                lessThanOrEqualTo: contentView.bottomAnchor, constant: -20
+            )
+        ])
         return image
-    }()
-    
-    private lazy var descriptionStack: UIStackView = {
-        let stack = UIStackView(
-            arrangedSubviews: [titleLabel, contentLabel, priceLabelStack]
-        )
-        stack.axis = .vertical
-        stack.spacing = 15
-        return stack
     }()
     
     private lazy var titleLabel: UILabel = {
@@ -57,6 +35,18 @@ class MenuItemCell: UICollectionViewCell {
         label.textAlignment = .natural
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
+        label.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        contentView.addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            label.topAnchor.constraint(equalTo: imageView.topAnchor),
+            label.leadingAnchor.constraint(
+                equalTo: imageView.trailingAnchor, constant: 16
+            ),
+            label.trailingAnchor.constraint(
+                equalTo: contentView.trailingAnchor, constant: -20
+            )
+        ])
         return label
     }()
     
@@ -67,13 +57,14 @@ class MenuItemCell: UICollectionViewCell {
         label.textAlignment = .natural
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
+        contentView.addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            label.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
+            label.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            label.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor)
+        ])
         return label
-    }()
-    
-    private lazy var priceLabelStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [UIView(), priceLabel])
-        stack.axis = .horizontal
-        return stack
     }()
     
     private lazy var priceLabel: UILabel = {
@@ -84,11 +75,28 @@ class MenuItemCell: UICollectionViewCell {
         label.layer.borderWidth = 1
         label.layer.cornerRadius = 5
         label.textAlignment = .center
+        contentView.addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.widthAnchor.constraint(equalToConstant: 80).isActive = true
-        label.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        NSLayoutConstraint.activate([
+            label.heightAnchor.constraint(equalToConstant: 30),
+            label.widthAnchor.constraint(equalToConstant: 80),
+            label.topAnchor.constraint(equalTo: contentLabel.bottomAnchor, constant: 16),
+            label.trailingAnchor.constraint(equalTo: contentLabel.trailingAnchor),
+            label.bottomAnchor.constraint(
+                equalTo: contentView.bottomAnchor, constant: -20
+            )
+        ])
         return label
     }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        backgroundColor = .Background.cell
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     var isCellOnTop: Bool = false
     
@@ -103,7 +111,6 @@ class MenuItemCell: UICollectionViewCell {
             titleLabel.text = menuItem?.title
             contentLabel.text = menuItem?.text
             priceLabel.text = menuItem?.price
-            horizontalStack.isHidden = false
         }
     }
     
