@@ -61,7 +61,6 @@ class MainTabsCoordinator: NSObject, IMainTabsCoordinator {
         tabBarController.tabBar.scrollEdgeAppearance = appearance
         tabBarController.tabBar.standardAppearance = appearance
         
-        tabBarController.tabBar.layer.shadowOffset = CGSize(width: 0, height: 0)
         tabBarController.tabBar.layer.shadowRadius = 10
         tabBarController.tabBar.layer.shadowColor = UIColor.Background.view.cgColor
         tabBarController.tabBar.layer.shadowOpacity = 1.0

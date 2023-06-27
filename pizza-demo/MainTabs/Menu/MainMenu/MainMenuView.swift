@@ -114,7 +114,7 @@ class MainMenuView: UIViewController, IMainMenuView {
                     subitem: item, count: 1
                 )
                 let section = NSCollectionLayoutSection(group: group)
-                section.orthogonalScrollingBehavior = .continuous
+                section.orthogonalScrollingBehavior = .groupPaging
                 return section
             } else {
                 let item = NSCollectionLayoutItem(
@@ -247,8 +247,8 @@ class MainMenuView: UIViewController, IMainMenuView {
         
         menuItemCellRegistration = UICollectionView
             .CellRegistration<MenuItemCell, MenuItem> { cell, indexPath, menuItem in
-                cell.menuItem = menuItem
                 cell.isCellOnTop = indexPath.item == 0 ? true : false
+                cell.menuItem = menuItem
                 if let image = self.menuImages[menuItem.id] {
                     cell.image = image
                     return

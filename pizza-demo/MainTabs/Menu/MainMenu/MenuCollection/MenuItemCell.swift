@@ -9,16 +9,22 @@ import UIKit
 
 class MenuItemCell: UICollectionViewCell {
     
+    private var imageTopAnchorConstraint: NSLayoutConstraint?
+    private var titleTopAnchorConstraint: NSLayoutConstraint?
+    
     private lazy var imageView: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
         contentView.addSubview(image)
         image.translatesAutoresizingMaskIntoConstraints = false
+        imageTopAnchorConstraint = image.topAnchor.constraint(
+            equalTo: contentView.topAnchor, constant: isCellOnTop ? 24 : 16
+        )
         NSLayoutConstraint.activate([
+            imageTopAnchorConstraint!,
             image.leadingAnchor.constraint(
                 equalTo: contentView.leadingAnchor, constant: 16
             ),
-            image.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             image.heightAnchor.constraint(equalToConstant: 130),
             image.widthAnchor.constraint(equalToConstant: 130),
             image.bottomAnchor.constraint(
@@ -38,8 +44,11 @@ class MenuItemCell: UICollectionViewCell {
         label.setContentHuggingPriority(.defaultHigh, for: .vertical)
         contentView.addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
+        titleTopAnchorConstraint = label.topAnchor.constraint(
+            equalTo: contentView.topAnchor, constant: isCellOnTop ? 28 : 20
+        )
         NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: imageView.topAnchor),
+            titleTopAnchorConstraint!,
             label.leadingAnchor.constraint(
                 equalTo: imageView.trailingAnchor, constant: 16
             ),
@@ -111,6 +120,9 @@ class MenuItemCell: UICollectionViewCell {
             titleLabel.text = menuItem?.title
             contentLabel.text = menuItem?.text
             priceLabel.text = menuItem?.price
+            
+            imageTopAnchorConstraint?.constant = isCellOnTop ? 24 : 16
+            titleTopAnchorConstraint?.constant = isCellOnTop ? 28 : 20
         }
     }
     
