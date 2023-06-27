@@ -301,42 +301,29 @@ class MainMenuView: UIViewController, IMainMenuView {
 
 extension MainMenuView: UICollectionViewDelegate {
     
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        guard
-            let topCell = menuCollectionView.visibleCells.first,
-            let path = menuCollectionView.indexPath(for: topCell),
-            let item = dataSource.itemIdentifier(for: path)
-        else { return }
-        var id: Int!
-        switch item {
-        case .promoBanner(_):
-            id = 0
-        case .menuItem(let item):
-            id = menu.items.firstIndex(where: {
-                $0.items.contains(where: { $0 == item })
-            })
-        }
-        let categoriesView = menuCollectionView.supplementaryView(
-            forElementKind: "categories-view", at: categoriesViewPath!
-        ) as! CategoriesView
-        categoriesView.categorySelected(index: id)
-    }
-    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let collectionView = scrollView as! UICollectionView
         guard let categoriesView = collectionView.visibleSupplementaryViews(
             ofKind: "categories-view"
         ).first as? CategoriesView else { return }
         
-        guard let categoriesViewInitialOriginY else {
-            categoriesViewInitialOriginY = categoriesView.frame.origin.y
-            return
-        }
-        if categoriesView.frame.origin.y > categoriesViewInitialOriginY {
-            categoriesView.dropShadow()
+        if let categoriesViewInitialOriginY {
+            if categoriesView.frame.origin.y > categoriesViewInitialOriginY {
+                categoriesView.dropShadow()
+            } else {
+                categoriesView.removeShadow()
+            }
         } else {
-            categoriesView.removeShadow()
+            categoriesViewInitialOriginY = categoriesView.frame.origin.y
         }
+        guard
+            let topCell = collectionView.visibleCells[1] as? MenuItemCell,
+            let menuItem = topCell.menuItem
+        else { return }
+        let id = menu.items.firstIndex(where: {
+            $0.items.contains(where: { $0 == menuItem })
+        }) ?? 0
+        categoriesView.categorySelected(index: id)
     }
     
 }

@@ -105,12 +105,11 @@ class CategoriesView: UICollectionReusableView {
     func categorySelected(index: Int) {
         let path = IndexPath(item: index, section: 0)
 
+        categoriesCollection.scrollToItem(at: path, at: .left, animated: true)
+        
         for (id, _) in categories!.enumerated() {
             categories![id].isSelected = id == index
         }
-        categoriesCollection.scrollToItem(
-            at: path, at: .left, animated: true
-        )
     }
     
     func dropShadow() {
@@ -131,7 +130,6 @@ extension CategoriesView: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
-        categorySelected(index: indexPath.item)
         onSelect?(item.id)
     }
     
