@@ -1,5 +1,7 @@
 ## **Pizza**
 
+**Click logo to watch YouTube shorts demo video**
+
 [![Demo video](https://raw.githubusercontent.com/khabibullet/pizza-demo/master/contents/pizza-logo.png)](https://youtube.com/shorts/hcx53Y4JSRQ?feature=share "Click to watch demo video")
 
 
