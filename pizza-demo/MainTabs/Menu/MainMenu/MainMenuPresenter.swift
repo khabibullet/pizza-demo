@@ -14,6 +14,7 @@ enum MainMenuPresenterOut {
 protocol IMainMenuPresenter: AnyObject {
     var view: IMainMenuView? { get set }
     var onOut: ((MainMenuPresenterOut) -> ())? { get set }
+    func fetchMenu()
 }
 
 class MainMenuPresenter: IMainMenuPresenter {
@@ -30,7 +31,8 @@ class MainMenuPresenter: IMainMenuPresenter {
     
     func fetchMenu() {
         Task {
-            guard let menu = await MenuProvider.fetchMenu() else { return }
+            try? await Task.sleep(nanoseconds: 1 * 1_000_000_000)
+            let menu = await MenuProvider.fetchMenu()
             await view?.show(menu: menu)
         }
     }

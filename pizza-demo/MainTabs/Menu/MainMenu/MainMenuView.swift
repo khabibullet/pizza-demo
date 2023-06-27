@@ -9,7 +9,7 @@ import UIKit
 
 protocol IMainMenuView: AnyObject {
     
-    func show(menu: Menu) async
+    func show(menu: Menu?) async
     
 }
 
@@ -66,6 +66,15 @@ class MainMenuView: UIViewController, IMainMenuView {
         return button
     }()
     
+//    private lazy var spinner: UIActivityIndicatorView = {
+//        let spinner = UIActivityIndicatorView(style: .large)
+//        spinner.translatesAutoresizingMaskIntoConstraints = false
+//        view.addSubview(spinner)
+//        spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+//        spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+//        return spinner
+//    }()
+    
     //MARK: - Menu Collection View
     
     private lazy var menuCollectionView: UICollectionView = {
@@ -83,6 +92,7 @@ class MainMenuView: UIViewController, IMainMenuView {
         collectionView.backgroundColor = .Background.view
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.delegate = self
+        collectionView.refreshControl = refresher
         
         view.addSubview(collectionView)
         NSLayoutConstraint.activate([
@@ -96,6 +106,12 @@ class MainMenuView: UIViewController, IMainMenuView {
             )
         ])
         return collectionView
+    }()
+    
+    private lazy var refresher: UIRefreshControl = {
+        let refresher = UIRefreshControl()
+        refresher.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
+        return refresher
     }()
     
     private lazy var menuCollectionLayout = UICollectionViewCompositionalLayout(sectionProvider: { id, _ in
@@ -193,14 +209,23 @@ class MainMenuView: UIViewController, IMainMenuView {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .Background.view
+        menuCollectionView.isHidden = false
         
         presenter.view = self
+        
+        setupCollectionViewElementsRegistration()
+        menuCollectionView.isHidden = false
+        refresher.beginRefreshing()
     }
     
     // MARK: - Public methods
     
     @MainActor
-    func show(menu: Menu) async {
+    func show(menu: Menu?) async {
+        guard let menu else {
+            refresher.endRefreshing()
+            return
+        }
         cityLabel.text = menu.city
         cityPicker.isHidden = false
         
@@ -208,8 +233,8 @@ class MainMenuView: UIViewController, IMainMenuView {
         if !menuCategories.isEmpty {
             menuCategories[0].isSelected = true
         }
-        setupCollectionViewElementsRegistration()
         reloadData(with: menu)
+        refresher.endRefreshing()
     }
     
     // MARK: - Private methods
@@ -261,7 +286,11 @@ class MainMenuView: UIViewController, IMainMenuView {
                     self.menuImages[menuItem.id] = image
                 }
             }
-        
+    }
+    
+    @objc
+    private func didPullToRefresh() {
+        presenter.fetchMenu()
     }
     
     private func reloadData(with menu: Menu) {
