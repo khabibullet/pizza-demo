@@ -34,6 +34,15 @@ class MenuItemCell: UICollectionViewCell {
         return image
     }()
     
+    private lazy var spinner: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView(style: .large)
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        imageView.addSubview(spinner)
+        spinner.centerXAnchor.constraint(equalTo: imageView.centerXAnchor).isActive = true
+        spinner.centerYAnchor.constraint(equalTo: imageView.centerYAnchor).isActive = true
+        return spinner
+    }()
+    
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .Heading.bold
@@ -101,6 +110,7 @@ class MenuItemCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .Background.cell
+        spinner.startAnimating()
     }
     
     required init?(coder: NSCoder) {
@@ -112,6 +122,7 @@ class MenuItemCell: UICollectionViewCell {
     var image: UIImage? {
         didSet {
             imageView.image = image
+            spinner.stopAnimating()
         }
     }
     

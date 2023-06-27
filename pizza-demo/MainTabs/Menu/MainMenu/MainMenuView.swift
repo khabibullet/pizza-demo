@@ -66,15 +66,6 @@ class MainMenuView: UIViewController, IMainMenuView {
         return button
     }()
     
-//    private lazy var spinner: UIActivityIndicatorView = {
-//        let spinner = UIActivityIndicatorView(style: .large)
-//        spinner.translatesAutoresizingMaskIntoConstraints = false
-//        view.addSubview(spinner)
-//        spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-//        spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-//        return spinner
-//    }()
-    
     //MARK: - Menu Collection View
     
     private lazy var menuCollectionView: UICollectionView = {
@@ -262,6 +253,7 @@ class MainMenuView: UIViewController, IMainMenuView {
                     return
                 }
                 Task {
+                    try? await Task.sleep(nanoseconds: 1_000_000_000)
                     let image = await MenuProvider.getImage(
                         uuid: promoBanner.id, url: promoBanner.imageUrl
                     )
@@ -279,6 +271,7 @@ class MainMenuView: UIViewController, IMainMenuView {
                     return
                 }
                 Task {
+                    try? await Task.sleep(nanoseconds: 1_000_000_000)
                     let image = await MenuProvider.getImage(
                         uuid: menuItem.id, url: menuItem.imageUrl
                     )
