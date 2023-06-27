@@ -3,9 +3,9 @@
 
 
 <p float="left">
-    <a>
+<!--    <a>-->
         <img src="contents/pizza-logo.png" height="200" />
-    </a>
+<!--    </a>-->
     <a href="https://www.figma.com/file/MHKcfEDwqXMZeYLnBVrniG/Тестовое-IOS-(Copy)-(Copy)?type=design&node-id=0-1&mode=design&t=wabyDRSusTfPEA30-0">
         <img src="contents/figma.png" height="200" />
     </a>
