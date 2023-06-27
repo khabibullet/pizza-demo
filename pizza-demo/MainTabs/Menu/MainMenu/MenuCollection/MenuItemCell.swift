@@ -34,7 +34,7 @@ class MenuItemCell: UICollectionViewCell {
         return image
     }()
     
-    private lazy var spinner: UIActivityIndicatorView = {
+    lazy var spinner: UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView(style: .large)
         spinner.translatesAutoresizingMaskIntoConstraints = false
         imageView.addSubview(spinner)
@@ -107,16 +107,6 @@ class MenuItemCell: UICollectionViewCell {
         return label
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        backgroundColor = .Background.cell
-        spinner.startAnimating()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     var isCellOnTop: Bool = false
     
     var image: UIImage? {
@@ -128,6 +118,7 @@ class MenuItemCell: UICollectionViewCell {
     
     var menuItem: MenuItem? {
         didSet {
+            backgroundColor = .Background.cell
             titleLabel.text = menuItem?.title
             contentLabel.text = menuItem?.text
             priceLabel.text = menuItem?.price

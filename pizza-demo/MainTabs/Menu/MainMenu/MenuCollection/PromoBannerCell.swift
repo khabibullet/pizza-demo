@@ -24,7 +24,7 @@ class PromoBannerCell: UICollectionViewCell {
         return image
     }()
     
-    private lazy var spinner: UIActivityIndicatorView = {
+    lazy var spinner: UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView(style: .large)
         spinner.translatesAutoresizingMaskIntoConstraints = false
         bannerView.addSubview(spinner)
@@ -32,15 +32,6 @@ class PromoBannerCell: UICollectionViewCell {
         spinner.centerYAnchor.constraint(equalTo: bannerView.centerYAnchor).isActive = true
         return spinner
     }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        spinner.startAnimating()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     var promoBanner: PromoBanner?
     

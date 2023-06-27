@@ -247,6 +247,7 @@ class MainMenuView: UIViewController, IMainMenuView {
         
         promoBannerCellRegistration = UICollectionView
             .CellRegistration<PromoBannerCell, PromoBanner> { cell, _, promoBanner in
+                cell.spinner.startAnimating()
                 cell.promoBanner = promoBanner
                 if let image = self.menuImages[promoBanner.id] {
                     cell.image = image
@@ -264,6 +265,7 @@ class MainMenuView: UIViewController, IMainMenuView {
         
         menuItemCellRegistration = UICollectionView
             .CellRegistration<MenuItemCell, MenuItem> { cell, indexPath, menuItem in
+                cell.spinner.startAnimating()
                 cell.isCellOnTop = indexPath.item == 0 ? true : false
                 cell.menuItem = menuItem
                 if let image = self.menuImages[menuItem.id] {
