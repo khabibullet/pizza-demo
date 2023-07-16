@@ -105,7 +105,7 @@ class CategoriesView: UICollectionReusableView {
     func categorySelected(index: Int) {
         let path = IndexPath(item: index, section: 0)
 
-        categoriesCollection.scrollToItem(at: path, at: .left, animated: true)
+        categoriesCollection.selectItem(at: path, animated: true, scrollPosition: .left)
         
         for (id, _) in categories!.enumerated() {
             categories![id].isSelected = id == index
